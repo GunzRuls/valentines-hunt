@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clue 4 ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        h1 {
+            color: #d63384;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #d63384;
+            width: 250px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: #ff4d94;
+            color: white;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #d63384;
+        }
+
+        #successMessage {
+            display: none;
+            margin-top: 40px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        p {
+            max-width: 500px;
+            margin: 20px auto;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Clue 4 💖</h1>
+
+<!-- Intro instructions -->
+<p>
+    To unlock your next clue, you'll need to make some calls 📞.  
+    Call each person and answer their questions to receive a word.
+    type all the words below in the order I give you.
+
+    p.s. make sure when you call these people, you ask them if they are involved in a 
+    valentine's day scavenger hunt.
+
+    <b 1st person to call></b>: your biggest rival and yet your most relatable friend. 
+    <!--Encore-->>
+    
+    <b 2nd person to call></b>: someone who believes it's okay to not have kids in marriage (just kidding).
+    <!--Wombat-->
+
+    <b 3rd person to call></b>: someone whom you meant by accident (or as we say, cuz of God)
+    and grew alongside of for a year.
+    <!--The chick-fil-a poo incident-->
+
+</p>
+
+<div>
+    <p>Words received (separate with spaces):</p>
+    <input type="text" id="answerInput" placeholder="Type the words here">
+    <button onclick="checkAnswer()">Submit</button>
+</div>
+
+<!-- Success message -->
+<div id="successMessage">
+    <h2>Correct! 💘</h2>
+    <!-- Customize the hint for your next clue -->
+    <p>
+        <!-- NEXT CLUE HINT PLACEHOLDER -->
+        Your next clue is waiting where we keep our favorite cozy spot 🌙✨
+    </p>
+    <!-- NEXT CLUE IMAGE PLACEHOLDER -->
+    <img src="assets/cozy_hint.jpg" alt="Hint" style="width:200px; border-radius:12px; margin-top:15px;">
+</div>
+
+<script>
+    // ===============================
+    // PLACEHOLDERS: FILL THESE IN
+    // ===============================
+
+    // Array of correct words from each caller, in order
+    const correctWords = [
+        "under",  // <-- Replace with first word
+        "the",  // <-- Replace with second word
+        "sink"   // <-- Replace with third word
+        // Add more if needed
+    ];
+
+    function checkAnswer() {
+        const userInput = document.getElementById("answerInput").value
+            .trim()
+            .toLowerCase()
+            .split(/\s+/); // split by spaces
+
+        // Check if all words match
+        let isCorrect = true;
+        if (userInput.length !== correctWords.length) {
+            isCorrect = false;
+        } else {
+            for (let i = 0; i < correctWords.length; i++) {
+                if (userInput[i] !== correctWords[i].toLowerCase()) {
+                    isCorrect = false;
+                    break;
+                }
+            }
+        }
+
+        if (isCorrect) {
+            document.getElementById("successMessage").style.display = "block";
+            document.querySelector("input").style.display = "none";
+            document.querySelector("button").style.display = "none";
+        } else {
+            alert("Hmm, not quite! Make sure you called each person and got the words in order 💕");
+            document.getElementById("answerInput").value = "";
+        }
+    }
+</script>
+
+</body>
+</html>
