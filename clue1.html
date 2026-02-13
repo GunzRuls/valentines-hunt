@@ -7,13 +7,15 @@
 <body style="text-align:center; font-family:sans-serif; margin-top:50px; background-color: #fff0f5;">
 
     <h1>Clue 1 💌</h1>
-    <p>Go to the place where you had a big scare! P.S. there is a lot of knowledge to be gained there.</p>
+    <p>Go to the place where you had a big scare! P.S. there is a lot of knowledge to be gained there.
+       (Future note: the pictures below are hints to the clue.)
+    </p>
 
     <!-- Placeholder for image/video -->
     <img src="assets/panda.jpg" alt="Here's a hint!" style="max-width:80%; margin-top:20px;">
 
     <!-- Input for next clue logic -->
-    <p>Enter the secret word to move to the next clue:</p>
+    <p>Enter the the name of the object related to the clue!:</p>
     <input type="text" id="answer" placeholder="Your answer here">
     <button onclick="checkAnswer()">Submit</button>
     <p id="feedback" style="color:red; margin-top:10px;"></p>
@@ -22,7 +24,7 @@
         function checkAnswer() {
             let answer = document.getElementById("answer").value.toLowerCase();
             // Replace "start" with your actual answer later
-            if(answer === "start") {
+            if(answer === "shelf") {
                 window.location.href = "clue2.html"; // link to next clue
             } else {
                 document.getElementById("feedback").innerText = "Not quite! Try again 💖";
