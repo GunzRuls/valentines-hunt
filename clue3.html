@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clue 3 ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        h1 {
+            color: #d63384;
+        }
+
+        .scramble-container {
+            margin-top: 40px;
+        }
+
+        .scramble-word {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #d63384;
+            width: 200px;
+            text-align: center;
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: #ff4d94;
+            color: white;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #d63384;
+        }
+
+        #successMessage {
+            display: none;
+            margin-top: 40px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Clue 3 💌</h1>
+    <p>Unscramble all the words to unlock your next clue!</p>
+
+    <div class="scramble-container">
+        <div class="scramble-word" id="scrambleWord"></div>
+        <input type="text" id="answerInput" placeholder="Type your answer">
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
+
+    <div id="successMessage">
+        <h2>All Correct! 💖</h2>
+        <p>Your next clue is hidden where we usually start our mornings together ☀️. Look carefully!</p>
+        <img src="assets/morning_hint.jpg" alt="Hint" style="width:200px; border-radius:12px; margin-top:15px;">
+    </div>
+
+    <script>
+        // Array of words and their scrambled versions
+        const words = [
+            { word: "blankets", scramble: "K A B L A N E T S" },
+            { word: "coffee", scramble: "F C O F E E" },
+            { word: "pillow", scramble: "L I P L O W" }
+        ];
+
+        let currentIndex = 0;
+
+        const scrambleWordDiv = document.getElementById("scrambleWord");
+        const input = document.getElementById("answerInput");
+
+        // Show first word
+        scrambleWordDiv.innerText = words[currentIndex].scramble;
+
+        function checkAnswer() {
+            const userInput = input.value.trim().toLowerCase();
+            if (userInput === words[currentIndex].word) {
+                currentIndex++;
+                input.value = "";
+                if (currentIndex >= words.length) {
+                    // All words done
+                    document.getElementById("successMessage").style.display = "block";
+                    document.querySelector(".scramble-container").style.display = "none";
+                } else {
+                    // Show next scrambled word
+                    scrambleWordDiv.innerText = words[currentIndex].scramble;
+                }
+            } else {
+                alert("Not quite! Try again 💕");
+                input.value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
