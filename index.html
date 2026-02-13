@@ -1,32 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Clue 1</title>
+    <title>Our First Year ❤️</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2.5em;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2em;
+            margin: 20px;
+        }
+
+        button {
+            background-color: #ff4d94;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #e60073;
+        }
+    </style>
 </head>
-<body style="text-align:center; font-family:sans-serif; margin-top:50px; background-color: #fff0f5;">
 
-    <h1>Clue 1 💌</h1>
-    <p>Where our adventure begins… scan me for the first memory!</p>
+<body>
 
-    <!-- Placeholder for image/video -->
-    <img src="placeholder1.jpg" alt="Memory Image" style="max-width:80%; margin-top:20px;">
+    <h1>Happy Valentine's Day! ❤️</h1>
+    <p>
+        I wanted to make something interactive for you to celebrate our first valentine's day together.
+        I hope you enjoy this little adventure I set up for you!
+    </p>
 
-    <!-- Input for next clue logic -->
-    <p>Enter the secret word to move to the next clue:</p>
-    <input type="text" id="answer" placeholder="Your answer here">
-    <button onclick="checkAnswer()">Submit</button>
-    <p id="feedback" style="color:red; margin-top:10px;"></p>
+    <button onclick="startHunt()">Start the Hunt 💌</button>
 
     <script>
-        function checkAnswer() {
-            let answer = document.getElementById("answer").value.toLowerCase();
-            // Replace "start" with your actual answer later
-            if(answer === "start") {
-                window.location.href = "clue2.html"; // link to next clue
-            } else {
-                document.getElementById("feedback").innerText = "Not quite! Try again 💖";
-            }
+        function startHunt() {
+            window.location.href = "clue1.html";
         }
     </script>
 
