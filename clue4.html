@@ -8,26 +8,48 @@
             font-family: Arial, sans-serif;
             background-color: #fff0f5;
             text-align: center;
-            padding-top: 60px;
+            padding: 60px 20px;
         }
 
         h1 {
             color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        p {
+            max-width: 550px;
+            margin: 15px auto;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .call-list {
+            max-width: 550px;
+            margin: 30px auto;
+            text-align: left;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .call-list p {
+            margin: 15px 0;
         }
 
         input[type="text"] {
-            padding: 10px;
+            padding: 12px;
             font-size: 16px;
             border-radius: 8px;
             border: 1px solid #d63384;
-            width: 250px;
+            width: 260px;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         button {
-            margin-left: 10px;
-            padding: 10px 20px;
+            margin-top: 15px;
+            padding: 12px 25px;
             font-size: 16px;
             border-radius: 8px;
             border: none;
@@ -48,10 +70,10 @@
             line-height: 1.6;
         }
 
-        p {
-            max-width: 500px;
-            margin: 20px auto;
-            font-size: 18px;
+        img {
+            width: 250px;
+            border-radius: 12px;
+            margin: 20px 0;
         }
     </style>
 </head>
@@ -59,71 +81,59 @@
 
 <h1>Clue 4 💖</h1>
 
-<!-- Intro instructions -->
 <p>
-    To unlock your next clue, you'll need to make some calls 📞.  
-    Call each person and answer their questions to receive a word.  
-    Type all the words below in the order I give you.
+    To unlock your next clue, you'll need to make some calls 📞.
+    Call each person and answer their questions to receive a word.
+    Type the words below in the exact order I give you.
 </p>
 
-<img src="assets/phone.png" alt="Hint Image" 
-     style="width:250px; border-radius:12px; margin:15px 0;">
+<img src="assets/phone.png" alt="Hint Image">
 
 <p>
-    <em>p.s. Make sure when you call these people, you ask them if they are involved in a Valentine's Day scavenger hunt 💌.</em>
+    <em>
+        P.S. When you call, ask them if they're involved in a Valentine's Day scavenger hunt 💌.
+    </em>
 </p>
 
-<div style="margin-top:20px; text-align: left;">
-    <p><strong>1st person to call:</strong> your biggest rival and yet your most relatable friend.</p>
-    
-    <p><strong>2nd person to call:</strong> someone who believes it's okay to not have kids in marriage.</p>
-    
-    <p><strong>3rd person to call:</strong> someone whom you met by accident (or as we say, cuz of God) and grew alongside for a year.</p>
+<div class="call-list">
+    <p><strong>1st person:</strong> Your biggest rival, yet somehow your most relatable friend.</p>
+    <p><strong>2nd person:</strong> Someone who believes it's okay to not have kids in marriage.</p>
+    <p><strong>3rd person:</strong> Someone you met by accident (or as we say… because of God) and grew alongside for a year.</p>
 </div>
 
+<p>Enter the words (separated by spaces):</p>
 
-<div>
-    <p>Words received (separate with spaces):</p>
-    <input type="text" id="answerInput" placeholder="Type the words here">
-    <button onclick="checkAnswer()">Submit</button>
-</div>
+<input type="text" id="answerInput" placeholder="Type the words here">
+<br>
+<button onclick="checkAnswer()">Submit</button>
 
-<!-- Success message -->
 <div id="successMessage">
     <h2>Correct! 💘</h2>
-    <!-- Customize the hint for your next clue -->
     <p>
-        <!-- NEXT CLUE HINT PLACEHOLDER -->
-        Now, actually go check under the sink!
+        Now… go check under the sink.
     </p>
 </div>
 
 <script>
-    // ===============================
-    // PLACEHOLDERS: FILL THESE IN
-    // ===============================
-
-    // Array of correct words from each caller, in order
     const correctWords = [
-        "under",  // <-- Replace with first word
-        "the",  // <-- Replace with second word
-        "sink"   // <-- Replace with third word
-        // Add more if needed
+        "under",
+        "the",
+        "sink"
     ];
 
     function checkAnswer() {
         const userInput = document.getElementById("answerInput").value
             .trim()
             .toLowerCase()
-            .split(/\s+/); // split by spaces
+            .split(/\s+/);
 
-        // Check if all words match
         let isCorrect = true;
+
         if (userInput.length !== correctWords.length) {
             isCorrect = false;
         } else {
             for (let i = 0; i < correctWords.length; i++) {
-                if (userInput[i] !== correctWords[i].toLowerCase()) {
+                if (userInput[i] !== correctWords[i]) {
                     isCorrect = false;
                     break;
                 }
@@ -132,7 +142,7 @@
 
         if (isCorrect) {
             document.getElementById("successMessage").style.display = "block";
-            document.querySelector("input").style.display = "none";
+            document.getElementById("answerInput").style.display = "none";
             document.querySelector("button").style.display = "none";
         } else {
             alert("Hmm, not quite! Make sure you called each person and got the words in order 💕");

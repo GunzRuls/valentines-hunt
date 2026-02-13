@@ -3,27 +3,49 @@
 <head>
     <title>Clue 3 ❤️</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #fff0f5;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 650px;
+            width: 100%;
             text-align: center;
-            padding-top: 60px;
         }
 
         h1 {
             color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            margin-bottom: 30px;
+            font-size: 1.1em;
         }
 
         .scramble-container {
-            margin-top: 40px;
+            margin-top: 20px;
         }
 
         .scramble-word {
             font-size: 28px;
             font-weight: bold;
-            letter-spacing: 2px;
+            letter-spacing: 4px;
             margin-bottom: 20px;
+            color: #d63384;
         }
 
         input[type="text"] {
@@ -31,20 +53,20 @@
             font-size: 16px;
             border-radius: 8px;
             border: 1px solid #d63384;
-            width: 250px;
+            width: 70%;
             text-align: center;
         }
 
         button {
-            margin-left: 10px;
-            padding: 10px 20px;
+            margin-top: 15px;
+            padding: 10px 25px;
             font-size: 16px;
             border-radius: 8px;
             border: none;
             cursor: pointer;
             background-color: #ff4d94;
             color: white;
-            transition: background-color 0.2s ease;
+            transition: 0.2s ease;
         }
 
         button:hover {
@@ -53,40 +75,69 @@
 
         #successMessage {
             display: none;
-            margin-top: 40px;
-            font-size: 18px;
-            line-height: 1.6;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #ffe0ef;
+        }
+
+        #successMessage h2 {
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        #successMessage p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        #successMessage img {
+            width: 200px;
+            border-radius: 12px;
+            margin-top: 10px;
         }
     </style>
 </head>
+
 <body>
 
-<h1>Clue 3 💌</h1>
-<p>Unscramble all the words to unlock your next clue!</p>
+<div class="card">
 
-<div class="scramble-container">
-    <div class="scramble-word" id="scrambleWord"></div>
-    <input type="text" id="answerInput" placeholder="Type your answer">
-    <button onclick="checkAnswer()">Submit</button>
-</div>
+    <h1>Clue 3 💌</h1>
+    <p class="subtitle">Unscramble all the words to unlock your next clue!</p>
 
-<div id="successMessage">
-    <h2>All Correct! 💖</h2>
-    <p>Life doesn't always go as planned, and most of the time we get all "scrambled"
-        trying to figure it out as we go. But, It brings so much joy and happiness to me
-        knowing that I'm walking through this life right beside you. Our life, the story God
-        is writing with us, is so beautiful and I can't wait to see how it unfolds. I love you so much,
-        and I'm so grateful to have you in my life. Together, we can unscramble anything! 💘
-    </p>
-    <p id = "nextclue">
-        Your next clue involves a gift I got you back in the day. It's small, it's cute,
-        and it requires other items in order for it to work.
-    </p>
-    <img src="assets/island.jpg" alt="Hint" style="width:200px; border-radius:12px; margin-top:15px;">
+    <div class="scramble-container">
+        <div class="scramble-word" id="scrambleWord"></div>
+        <input type="text" id="answerInput" placeholder="Type your answer">
+        <br>
+        <button onclick="checkAnswer()">Submit</button>
+    </div>
+
+    <div id="successMessage">
+        <h2>All Correct! 💖</h2>
+
+        <p>
+            Life doesn’t always go as planned, and most of the time we get all “scrambled”
+            trying to figure it out as we go. But it brings me so much joy knowing that
+            I’m walking through this life right beside you.
+        </p>
+
+        <p>
+            The story God is writing with us is so beautiful, and I can’t wait to see how it unfolds.
+            I love you so much, and I’m so grateful to have you in my life.
+            Together, we can unscramble anything. 💘
+        </p>
+
+        <p id="nextclue">
+            Your next clue involves a gift I got you back in the day.
+            It’s small, it’s cute, and it requires other items in order for it to work.
+        </p>
+
+        <img src="assets/island.jpg" alt="Hint">
+    </div>
+
 </div>
 
 <script>
-    // Array of words
     const words = [
         "passenger princess",
         "botlane duo",
@@ -102,18 +153,18 @@
     const scrambleWordDiv = document.getElementById("scrambleWord");
     const input = document.getElementById("answerInput");
 
-    // Function to shuffle letters of a word (keeps spaces in place)
     function shuffleWord(word) {
         const chars = word.split('');
-        let letters = chars.filter(c => c !== ''); // get all letters
-        // Fisher-Yates shuffle
+        let letters = chars.filter(c => c !== '');
+
         for (let i = letters.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [letters[i], letters[j]] = [letters[j], letters[i]];
         }
-        // Re-insert spaces
+
         let result = '';
         let letterIndex = 0;
+
         for (let c of chars) {
             if (c === ' ') {
                 result += ' ';
@@ -121,23 +172,23 @@
                 result += letters[letterIndex++];
             }
         }
+
         return result.toUpperCase().split('').join(' ');
     }
 
-    // Show first scrambled word
     scrambleWordDiv.innerText = shuffleWord(words[currentIndex]);
 
     function checkAnswer() {
         const userInput = input.value.trim().toLowerCase();
+
         if (userInput === words[currentIndex]) {
             currentIndex++;
             input.value = "";
+
             if (currentIndex >= words.length) {
-                // All words done
                 document.getElementById("successMessage").style.display = "block";
                 document.querySelector(".scramble-container").style.display = "none";
             } else {
-                // Show next scrambled word
                 scrambleWordDiv.innerText = shuffleWord(words[currentIndex]);
             }
         } else {

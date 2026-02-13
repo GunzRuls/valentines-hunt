@@ -8,34 +8,48 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #fff0f5;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
             text-align: center;
-            padding-top: 60px;
         }
 
         h1 {
             color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            margin-bottom: 40px;
+            font-size: 1.1em;
         }
 
         .game-board {
-            width: 600px;
-            margin: 50px auto;
+            margin: 0 auto 40px auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
+            max-width: 650px;
         }
 
         .card {
-            width: 120px;
-            height: 160px;
+            aspect-ratio: 3 / 4;
             background-color: #ff4d94;
             border-radius: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px; /* emoji size */
+            font-size: 50px;
             color: white;
             transition: transform 0.2s ease, background-color 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
         }
 
         .card:hover {
@@ -47,8 +61,8 @@
         }
 
         .card img {
-            width: 80%;
-            height: 80%;
+            width: 85%;
+            height: 85%;
             border-radius: 10px;
             object-fit: cover;
         }
@@ -56,51 +70,75 @@
         #successMessage {
             display: none;
             margin-top: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #successMessage h2 {
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        #successMessage p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        #successMessage img {
+            width: 200px;
+            border-radius: 12px;
+            margin-top: 10px;
         }
 
         @media (max-width: 600px) {
             .game-board {
-                width: 90%;
-            }
-
-            .card {
-                width: 100%;
-                height: 110px;
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
 </head>
+
 <body>
 
-    <h1>Clue 2 💖</h1>
-    <p>Match the memories to unlock your next clue.</p>
+    <div class="container">
 
-    <div class="game-board" id="gameBoard"></div>
+        <h1>Clue 2 💖</h1>
+        <p class="subtitle">Match the memories to unlock your next clue.</p>
 
-    <div id="successMessage" style="display:none;">
-    <h2>You Matched Them All! 💘</h2>
-    
-    <!-- Sweet note -->
-    <p>
-        Whenever we play league, it is true that we get into the worst fights, to the point
-        where we're pretty much not playing and just yelling and attacking each other. 
-        But I also know that those moments are just a small part of our relationship, and they don't define us.
-        Even these moments of conflict, I appreciate them, because deep down, I still love you and care
-        about you, and I know that we can work through anything together. I love you so much, and I'm so grateful
-        to have you in my life, even during the tough times. Together, we paddle forever!💖
-    </p>
-    
-    <!-- Next clue hint -->
-    <p id="nextClue">
-        Your next clue is the place where I usually tell you is really dirty; we
-        were just talking about it actually LOL.
-    </p>
-    <img src="assets/trash.jpg" alt="Hint" style="width:200px; border-radius:12px; margin-bottom:15px;">
+        <div class="game-board" id="gameBoard"></div>
+
+        <div id="successMessage">
+            <h2>You Matched Them All! 💘</h2>
+
+            <p>
+                Whenever we play league, it’s true that we get into the worst fights, to the point
+                where we're barely playing and just yelling at each other.
+                But those moments are only a small part of our story, and they don’t define us.
+            </p>
+
+            <p>
+                Even in conflict, I appreciate what it shows, that we care deeply.
+                I love you, even in the frustrating moments.
+                I’m grateful for you in the good, the messy, and everything in between.
+                Together, we paddle forever. 💖
+            </p>
+
+            <p id="nextClue">
+                Your next clue is the place where I usually tell you is really dirty.
+                We were just talking about it actually… LOL.
+            </p>
+
+            <img src="assets/trash.jpg" alt="Hint">
+        </div>
+
     </div>
 
-
     <script>
-        // Image paths (already include folder)
         const images = [
             "memory_game_images/aur.png", "memory_game_images/aur.png",
             "memory_game_images/fiddle.png", "memory_game_images/fiddle.png",
@@ -112,9 +150,8 @@
             "memory_game_images/smol.png", "memory_game_images/smol.png"
         ];
 
-        const totalPairs = 8; // 8 pairs = 16 cards
+        const totalPairs = 8;
         let shuffled = images.sort(() => 0.5 - Math.random());
-
         const board = document.getElementById("gameBoard");
 
         let firstCard = null;
@@ -122,12 +159,10 @@
         let lockBoard = false;
         let matches = 0;
 
-        shuffled.forEach((image, index) => {
+        shuffled.forEach((image) => {
             const card = document.createElement("div");
             card.classList.add("card");
             card.dataset.image = image;
-
-            // Use an emoji as the back of the card
             card.innerText = "❓";
 
             board.appendChild(card);
@@ -136,7 +171,6 @@
                 if (lockBoard) return;
                 if (card === firstCard) return;
 
-                // show front image
                 card.innerHTML = `<img src="${image}" alt="memory">`;
 
                 if (!firstCard) {
@@ -155,7 +189,6 @@
                         if (matches === totalPairs) {
                             document.getElementById("successMessage").style.display = "block";
                         }
-
                     } else {
                         setTimeout(() => {
                             firstCard.innerText = "❓";
