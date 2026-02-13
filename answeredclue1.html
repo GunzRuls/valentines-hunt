@@ -21,6 +21,13 @@
         }   
     </style>
 </head>
+    
+    <script>
+    function revealClue() {
+        document.getElementById("nextClue").style.display = "block";
+    }
+    </script>
+
 <body>
 
     <h1>You Got It! 💘</h1>
@@ -32,6 +39,16 @@
         my life as my partner, my companion, and my best friend. I love you more than words can express, 
         and I'm so excited for all the adventures we have yet to come!
     </p>
+
+    <button onclick="revealClue()">Reveal My Next Clue 💖</button>
+
+    <div id="nextClue" style="display: none; margin-top: 40px;">
+    <h2>Your Next Clue 💌</h2>
+    <p>
+        Go to the place where we fight the most.
+    </p>
+    </div>
+
 
 </body>
 </html>
