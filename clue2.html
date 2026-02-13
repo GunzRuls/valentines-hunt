@@ -33,6 +33,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 50px; /* emoji size */
+            color: white;
             transition: transform 0.2s ease, background-color 0.3s ease;
         }
 
@@ -81,7 +83,7 @@
     </div>
 
     <script>
-        // Placeholder images (replace with your own)
+        // Image paths (already include folder)
         const images = [
             "memory_game_images/aur.jpg", "memory_game_images/aur.jpg",
             "memory_game_images/fiddle.jpg", "memory_game_images/fiddle.jpg",
@@ -108,7 +110,7 @@
             card.classList.add("card");
             card.dataset.image = image;
 
-            // show back of card initially
+            // Use an emoji as the back of the card
             card.innerText = "❓";
 
             board.appendChild(card);
@@ -118,7 +120,7 @@
                 if (card === firstCard) return;
 
                 // show front image
-                card.innerHTML = `<img src="images/${image}" alt="memory">`;
+                card.innerHTML = `<img src="${image}" alt="memory">`;
 
                 if (!firstCard) {
                     firstCard = card;
@@ -139,8 +141,8 @@
 
                     } else {
                         setTimeout(() => {
-                            firstCard.innerHTML = '<img src="images/back.jpg" alt="card back">';
-                            secondCard.innerHTML = '<img src="images/back.jpg" alt="card back">';
+                            firstCard.innerText = "❓";
+                            secondCard.innerText = "❓";
                             resetTurn();
                         }, 1000);
                     }
