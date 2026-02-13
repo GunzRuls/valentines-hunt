@@ -1,31 +1,110 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Clue 1</title>
+    <title>Clue 1 💌</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: white;
+            padding: 40px 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d63384;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.7;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 85%;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        input {
+            padding: 10px;
+            width: 70%;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            background-color: #ff4d94;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #d63384;
+        }
+
+        #feedback {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body style="text-align:center; font-family:sans-serif; margin-top:50px; background-color: #fff0f5;">
 
-    <h1>Clue 1 💌</h1>
-    <p>Go to the place where you had a big scare! P.S. there is a lot of knowledge to be gained there.
-       (Future note: the pictures below are hints to the clue.)
-    </p>
+<body>
 
-    <!-- Placeholder for image/video -->
-    <img src="assets/panda.jpg" alt="Here's a hint!" style="max-width:80%; margin-top:20px;">
+    <div class="card">
+        <h1>Clue 1 💌</h1>
 
-    <!-- Input for next clue logic -->
-    <p>Enter the the name of the object related to the clue!:</p>
-    <input type="text" id="answer" placeholder="Your answer here">
-    <button onclick="checkAnswer()">Submit</button>
-    <p id="feedback" style="color:red; margin-top:10px;"></p>
+        <p>
+            Go to the place where you had a big scare.
+        </p>
+
+        <p>
+            <em>P.S. There is a lot of knowledge to be gained there.</em><br>
+            <small>(The picture below is a hint.)</small>
+        </p>
+
+        <img src="assets/panda.jpg" alt="Here's a hint!">
+
+        <p><strong>Enter the name of the object related to the clue:</strong></p>
+
+        <input type="text" id="answer" placeholder="Your answer here">
+        <br>
+        <button onclick="checkAnswer()">Submit</button>
+
+        <p id="feedback" style="color:#d63384;"></p>
+    </div>
 
     <script>
         function checkAnswer() {
-            let answer = document.getElementById("answer").value.toLowerCase();
-            // Replace "start" with your actual answer later
+            let answer = document.getElementById("answer").value.toLowerCase().trim();
+
             if(answer === "shelf") {
-                window.location.href = "answeredclue1.html"; // link to next clue
+                window.location.href = "answeredclue1.html";
             } else {
                 document.getElementById("feedback").innerText = "Not quite! Try again 💖";
             }
