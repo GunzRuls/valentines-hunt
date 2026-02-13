@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clue 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="text-align:center; font-family:sans-serif; margin-top:50px; background-color: #fff0f5;">
+
+    <h1>Clue 1 💌</h1>
+    <p>Where our adventure begins… scan me for the first memory!</p>
+
+    <!-- Placeholder for image/video -->
+    <img src="placeholder1.jpg" alt="Memory Image" style="max-width:80%; margin-top:20px;">
+
+    <!-- Input for next clue logic -->
+    <p>Enter the secret word to move to the next clue:</p>
+    <input type="text" id="answer" placeholder="Your answer here">
+    <button onclick="checkAnswer()">Submit</button>
+    <p id="feedback" style="color:red; margin-top:10px;"></p>
+
+    <script>
+        function checkAnswer() {
+            let answer = document.getElementById("answer").value.toLowerCase();
+            // Replace "start" with your actual answer later
+            if(answer === "start") {
+                window.location.href = "clue2.html"; // link to next clue
+            } else {
+                document.getElementById("feedback").innerText = "Not quite! Try again 💖";
+            }
+        }
+    </script>
+
+</body>
+</html>
