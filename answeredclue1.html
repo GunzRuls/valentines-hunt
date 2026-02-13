@@ -5,50 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            text-align: left;
             font-family: Arial, sans-serif;
             background-color: #fff0f5;
-            padding-top: 100px;
+            padding: 80px 20px;
+            text-align: center;
         }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
         h1 {
             color: #d63384;
+            margin-bottom: 25px;
         }
+
         p {
-            max-width: 600px;
-            margin: 30px auto;
-            line-height: 1.6;
+            line-height: 1.8;
             font-size: 1.1em;
-        }   
+            margin-bottom: 25px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            background-color: #ff4d94;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #d63384;
+        }
+
+        #nextClue {
+            display: none;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #ffd6e8;
+        }
+
+        h2 {
+            color: #d63384;
+            margin-bottom: 20px;
+        }
     </style>
-</head>
-    
+
     <script>
-    function revealClue() {
-        document.getElementById("nextClue").style.display = "block";
-    }
+        function revealClue() {
+            document.getElementById("nextClue").style.display = "block";
+        }
     </script>
+</head>
 
 <body>
 
-    <h1>You Got It! 💘</h1>
-    <p>
-        That moment reminds me of how much God loves you and how much I love you too. 
-        I'm so grateful for you and the joy you bring to my life. When I realized what happened, 
-        the first thing I thought was "is she okay?", as I'm looking through the clutter and noticing the
-        damage done to the coffee table and our figures. I thank God every day that I get to have you in
-        my life as my partner, my companion, and my best friend. I love you more than words can express, 
-        and I'm so excited for all the adventures we have yet to come!
-    </p>
+    <div class="container">
 
-    <button onclick="revealClue()">Reveal My Next Clue 💖</button>
+        <h1>You Got It! 💘</h1>
 
-    <div id="nextClue" style="display: none; margin-top: 40px;">
-    <h2>Your Next Clue 💌</h2>
-    <p>
-        Go to the place where we fight the most.
-    </p>
+        <p>
+            That moment reminds me of how much <strong>God loves you</strong> and how much 
+            <strong>I love you too</strong>.
+        </p>
+
+        <p>
+            I'm so grateful for you and the joy you bring to my life. When I realized what happened, 
+            the first thing I thought was, <em>"Is she okay?"</em> As I looked through the clutter and 
+            noticed the damage to the coffee table and our figures, I was just thankful that you were safe.
+        </p>
+
+        <p>
+            I thank God every day that I get to have you in my life as my partner, my companion, 
+            and my best friend. I love you more than words can express, and I’m so excited for all 
+            the adventures we have yet to come.
+        </p>
+
+        <button onclick="revealClue()">Reveal My Next Clue 💖</button>
+
+        <div id="nextClue">
+            <h2>Your Next Clue 💌</h2>
+            <p>
+                Go to the place where we fight the most.
+            </p>
+        </div>
+
     </div>
-
 
 </body>
 </html>
