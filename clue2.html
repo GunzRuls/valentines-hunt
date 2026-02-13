@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clue 2 ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff0f5;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        h1 {
+            color: #d63384;
+        }
+
+        .game-board {
+            width: 320px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .card {
+            width: 70px;
+            height: 90px;
+            background-color: #ff4d94;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .matched {
+            background-color: #ffcce6;
+            color: #d63384;
+        }
+
+        #successMessage {
+            display: none;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Clue 2 💖</h1>
+    <p>Match the memories to unlock your next clue.</p>
+
+    <div class="game-board" id="gameBoard"></div>
+
+    <div id="successMessage">
+        <h2>You Matched Them All! 💘</h2>
+        <p>Your next clue is hidden where we unwind at night.</p>
+    </div>
+
+    <script>
+        const emojis = ["💍","💍","☕","☕","🏠","🏠","🎮","🎮"];
+        let shuffled = emojis.sort(() => 0.5 - Math.random());
+
+        const board = document.getElementById("gameBoard");
+
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+        let matches = 0;
+
+        shuffled.forEach((emoji, index) => {
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.dataset.emoji = emoji;
+            card.dataset.index = index;
+            card.innerText = "?";
+            board.appendChild(card);
+
+            card.addEventListener("click", () => {
+                if (lockBoard) return;
+                if (card === firstCard) return;
+
+                card.innerText = emoji;
+
+                if (!firstCard) {
+                    firstCard = card;
+                } else {
+                    secondCard = card;
+                    lockBoard = true;
+
+                    if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
+                        firstCard.classList.add("matched");
+                        secondCard.classList.add("matched");
+                        matches++;
+
+                        resetTurn();
+
+                        if (matches === 4) {
+                            document.getElementById("successMessage").style.display = "block";
+                        }
+
+                    } else {
+                        setTimeout(() => {
+                            firstCard.innerText = "?";
+                            secondCard.innerText = "?";
+                            resetTurn();
+                        }, 800);
+                    }
+                }
+            });
+        });
+
+        function resetTurn() {
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+        }
+    </script>
+
+</body>
+</html>
