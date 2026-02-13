@@ -17,34 +17,54 @@
         }
 
         .game-board {
-            width: 320px;
-            margin: 40px auto;
+            width: 600px;
+            margin: 50px auto;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            gap: 15px;
         }
 
         .card {
-            width: 70px;
-            height: 90px;
+            width: 120px;
+            height: 160px;
             background-color: #ff4d94;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            color: white;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
         }
 
         .matched {
             background-color: #ffcce6;
-            color: #d63384;
+        }
+
+        .card img {
+            width: 80%;
+            height: 80%;
+            border-radius: 10px;
+            object-fit: cover;
         }
 
         #successMessage {
             display: none;
-            margin-top: 30px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            .game-board {
+                width: 90%;
+            }
+
+            .card {
+                width: 100%;
+                height: 110px;
+            }
         }
     </style>
 </head>
@@ -61,8 +81,20 @@
     </div>
 
     <script>
-        const emojis = ["💍","💍","☕","☕","🏠","🏠","🎮","🎮"];
-        let shuffled = emojis.sort(() => 0.5 - Math.random());
+        // Placeholder images (replace with your own)
+        const images = [
+            "aur.jpg", "aur.jpg",
+            "fiddle.jpg", "fiddle.jpg",
+            "lux.jpg", "lux.jpg",
+            "pop.jpg", "pop.jpg",
+            "samira.jpg", "samira.jpg",
+            "sett.jpg", "sett.jpg",
+            "sera.jpg", "sera.jpg",
+            "smol.jpg", "smol.jpg"
+        ];
+
+        const totalPairs = 8; // 8 pairs = 16 cards
+        let shuffled = images.sort(() => 0.5 - Math.random());
 
         const board = document.getElementById("gameBoard");
 
@@ -71,19 +103,22 @@
         let lockBoard = false;
         let matches = 0;
 
-        shuffled.forEach((emoji, index) => {
+        shuffled.forEach((image, index) => {
             const card = document.createElement("div");
             card.classList.add("card");
-            card.dataset.emoji = emoji;
-            card.dataset.index = index;
-            card.innerText = "?";
+            card.dataset.image = image;
+
+            // show back of card initially
+            card.innerHTML = '<img src="images/back.jpg" alt="card back">';
+
             board.appendChild(card);
 
             card.addEventListener("click", () => {
                 if (lockBoard) return;
                 if (card === firstCard) return;
 
-                card.innerText = emoji;
+                // show front image
+                card.innerHTML = `<img src="images/${image}" alt="memory">`;
 
                 if (!firstCard) {
                     firstCard = card;
@@ -91,23 +126,23 @@
                     secondCard = card;
                     lockBoard = true;
 
-                    if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
+                    if (firstCard.dataset.image === secondCard.dataset.image) {
                         firstCard.classList.add("matched");
                         secondCard.classList.add("matched");
                         matches++;
 
                         resetTurn();
 
-                        if (matches === 4) {
+                        if (matches === totalPairs) {
                             document.getElementById("successMessage").style.display = "block";
                         }
 
                     } else {
                         setTimeout(() => {
-                            firstCard.innerText = "?";
-                            secondCard.innerText = "?";
+                            firstCard.innerHTML = '<img src="images/back.jpg" alt="card back">';
+                            secondCard.innerHTML = '<img src="images/back.jpg" alt="card back">';
                             resetTurn();
-                        }, 800);
+                        }, 1000);
                     }
                 }
             });
