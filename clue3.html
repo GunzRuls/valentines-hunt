@@ -31,7 +31,7 @@
             font-size: 16px;
             border-radius: 8px;
             border: 1px solid #d63384;
-            width: 200px;
+            width: 250px;
             text-align: center;
         }
 
@@ -61,56 +61,82 @@
 </head>
 <body>
 
-    <h1>Clue 3 💌</h1>
-    <p>Unscramble all the words to unlock your next clue!</p>
+<h1>Clue 3 💌</h1>
+<p>Unscramble all the words to unlock your next clue!</p>
 
-    <div class="scramble-container">
-        <div class="scramble-word" id="scrambleWord"></div>
-        <input type="text" id="answerInput" placeholder="Type your answer">
-        <button onclick="checkAnswer()">Submit</button>
-    </div>
+<div class="scramble-container">
+    <div class="scramble-word" id="scrambleWord"></div>
+    <input type="text" id="answerInput" placeholder="Type your answer">
+    <button onclick="checkAnswer()">Submit</button>
+</div>
 
-    <div id="successMessage">
-        <h2>All Correct! 💖</h2>
-        <p>Your next clue is hidden where we usually start our mornings together ☀️. Look carefully!</p>
-        <img src="assets/morning_hint.jpg" alt="Hint" style="width:200px; border-radius:12px; margin-top:15px;">
-    </div>
+<div id="successMessage">
+    <h2>All Correct! 💖</h2>
+    <p>Your next clue is hidden where we usually start our mornings together ☀️. Look carefully!</p>
+    <img src="assets/morning_hint.jpg" alt="Hint" style="width:200px; border-radius:12px; margin-top:15px;">
+</div>
 
-    <script>
-        // Array of words and their scrambled versions
-        const words = [
-            { word: "blankets", scramble: "K A B L A N E T S" },
-            { word: "coffee", scramble: "F C O F E E" },
-            { word: "pillow", scramble: "L I P L O W" }
-        ];
+<script>
+    // Array of words
+    const words = [
+        "passenger princess",
+        "botlane duo",
+        "superstore",
+        "cuddle buddy",
+        "paddle boat",
+        "dress to impress queen",
+        "eggmode",
+        "beautiful"
+    ];
 
-        let currentIndex = 0;
+    let currentIndex = 0;
+    const scrambleWordDiv = document.getElementById("scrambleWord");
+    const input = document.getElementById("answerInput");
 
-        const scrambleWordDiv = document.getElementById("scrambleWord");
-        const input = document.getElementById("answerInput");
-
-        // Show first word
-        scrambleWordDiv.innerText = words[currentIndex].scramble;
-
-        function checkAnswer() {
-            const userInput = input.value.trim().toLowerCase();
-            if (userInput === words[currentIndex].word) {
-                currentIndex++;
-                input.value = "";
-                if (currentIndex >= words.length) {
-                    // All words done
-                    document.getElementById("successMessage").style.display = "block";
-                    document.querySelector(".scramble-container").style.display = "none";
-                } else {
-                    // Show next scrambled word
-                    scrambleWordDiv.innerText = words[currentIndex].scramble;
-                }
+    // Function to shuffle letters of a word (keeps spaces in place)
+    function shuffleWord(word) {
+        const chars = word.split('');
+        let letters = chars.filter(c => c !== ''); // get all letters
+        // Fisher-Yates shuffle
+        for (let i = letters.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [letters[i], letters[j]] = [letters[j], letters[i]];
+        }
+        // Re-insert spaces
+        let result = '';
+        let letterIndex = 0;
+        for (let c of chars) {
+            if (c === ' ') {
+                result += ' ';
             } else {
-                alert("Not quite! Try again 💕");
-                input.value = "";
+                result += letters[letterIndex++];
             }
         }
-    </script>
+        return result.toUpperCase().split('').join(' ');
+    }
+
+    // Show first scrambled word
+    scrambleWordDiv.innerText = shuffleWord(words[currentIndex]);
+
+    function checkAnswer() {
+        const userInput = input.value.trim().toLowerCase();
+        if (userInput === words[currentIndex]) {
+            currentIndex++;
+            input.value = "";
+            if (currentIndex >= words.length) {
+                // All words done
+                document.getElementById("successMessage").style.display = "block";
+                document.querySelector(".scramble-container").style.display = "none";
+            } else {
+                // Show next scrambled word
+                scrambleWordDiv.innerText = shuffleWord(words[currentIndex]);
+            }
+        } else {
+            alert("Not quite! Try again 💕");
+            input.value = "";
+        }
+    }
+</script>
 
 </body>
 </html>
